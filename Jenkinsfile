@@ -4,12 +4,18 @@ pipeline {
     stages {
         stage('Verify Branch') {
             steps {
-                echo $GIT_BRANCH
+                echo 'Hello'
             }
 	}
-        stage('Hello Branch') {
+        stage('Docker Build') {
             steps {
-                echo $GIT_BRANCH
+                sh '''
+		cd azure-vote/
+		docker images -a
+		docker images -t jenkins-pipeline .
+		docker images -a
+		cd ..
+		'''
             }
         }
     }
